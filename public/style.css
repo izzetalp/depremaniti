@@ -1,0 +1,363 @@
+body {
+  display: grid;
+  margin: 0px;
+  height: 100vh;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1fr;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #f8fafc; /* Premium açık gri arkaplan */
+  color: #0f172a;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2.5rem;
+  background-color: white;
+  align-items: center;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05); /* Yumuşak alt gölge */
+  z-index: 10;
+}
+
+.brand-title {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.brand-title > a {
+  text-decoration: none;
+  color: #0f172a;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.025em;
+}
+
+#menu {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.menu-item {
+  text-decoration: none;
+  color: #475569;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.menu-item:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+
+main {
+  background-color: #f8fafc;
+  overflow-y: auto;
+  padding: 2.5rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+footer {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  color: #94a3b8; /* Daha silik ve kibar bir gri */
+  font-size: 0.8rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* YENI TASARIM SINIFLARI (Liste Gorunumu) */
+.section-title {
+  margin: 1.5rem 0 1rem 0;
+  font-size: 1.25rem;
+  color: #0f172a;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 0.75rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.earthquake-list-container {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  overflow: hidden; /* Köşelerin yuvarlak kalması için */
+}
+
+.earthquake-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.125rem 1.5rem;
+  border-bottom: 1px solid #f1f5f9;
+  transition: background-color 0.2s ease;
+  cursor: pointer; /* Tıklanabilir olmasını belirt */
+}
+
+.earthquake-list-item:last-child {
+  border-bottom: none;
+}
+
+.earthquake-list-item:hover {
+  background-color: #f8fafc;
+}
+
+.eq-info h3 {
+  margin: 0 0 0.35rem 0;
+  font-size: 1.05rem;
+  color: #1e293b;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.eq-info p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+/* Sağ Taraf - Büyüklük ve Etki Çubuğu Taşıyıcısı */
+.eq-right-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Hissedilme Oranı Çubuğu */
+.prob-bar-outer {
+  width: 100%;
+  height: 4px;
+  background-color: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.prob-bar-inner {
+  height: 100%;
+  border-radius: 4px;
+  background-color: #3b82f6;
+  transition: width 0.3s ease;
+}
+
+.eq-mag {
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 0.35rem 0.85rem;
+  border-radius: 8px;
+  background-color: #f1f5f9;
+  min-width: 3.5rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Dikkat Çekici Deprem Vurguları */
+.earthquake-list-item.felt-earthquake {
+  background-color: #fffbeb;
+  border-left: 4px solid #f59e0b;
+}
+
+.earthquake-list-item.felt-earthquake:hover {
+  background-color: #fef3c7;
+}
+
+.earthquake-list-item.felt-earthquake-high {
+  background-color: #fef2f2;
+  border-left: 4px solid #ef4444;
+}
+
+.earthquake-list-item.felt-earthquake-high:hover {
+  background-color: #fee2e2;
+}
+
+/* Filtre Butonlari (Pills) */
+.filter-container {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 0.5rem 1.125rem;
+  border-radius: 99px;
+  border: 1px solid #cbd5e1;
+  background-color: white;
+  color: #475569;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+}
+
+.filter-btn:hover {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+.filter-btn.active {
+  background-color: #0f172a; /* Zarif bir siyah/gece mavisi buton */
+  border-color: #0f172a;
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Hakkinda Sayfasi */
+.about-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  padding: 2.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.about-card h2 {
+  margin-top: 0;
+  color: #0f172a;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.about-card p {
+  color: #475569;
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+}
+
+/* Mobil Uyumluluk (Responsive) */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 1.25rem 1rem;
+    gap: 1rem;
+  }
+
+  .brand-title > a {
+    font-size: 1.5rem;
+  }
+
+  #menu {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .menu-item {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  main {
+    padding: 1.5rem 1rem;
+  }
+
+  .earthquake-list-item {
+    padding: 0.85rem 1rem;
+    align-items: center;
+  }
+
+  .eq-info h3 {
+    font-size: 0.95rem;
+  }
+
+  .eq-info p {
+    font-size: 0.825rem;
+  }
+
+  .eq-mag {
+    font-size: 1.1rem;
+    padding: 0.35rem 0.65rem;
+    min-width: 3rem;
+  }
+  
+  .about-card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  /* Mobil Modal Optimizasyonları */
+  #detay-modal {
+    width: 95%;
+    max-width: 95%; /* Varsayılan max-width: 500px ezilir */
+    margin: auto;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 1.25rem;
+  }
+
+  /* Harita yüksekliği mobilde orantılı 40vh olur (Inline style ezmek için !important) */
+  #map {
+    height: 40vh !important;
+  }
+}
+
+/* Modallar */
+#detay-modal {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  max-width: 500px;
+  width: 90%;
+  background-color: white;
+  color: #0f172a;
+  will-change: transform, opacity;
+  transform: translateZ(0); /* GPU Donanım hızlandırma */
+}
+
+#detay-modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+#modal-title {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #0f172a;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+}
+
+.modal-body p {
+  margin: 0.5rem 0;
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+.modal-body strong {
+  color: #1e293b;
+}
+
+/* Modal Open Animation */
+dialog[open] {
+  animation: modalFadeIn 0.3s ease-out normal;
+}
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

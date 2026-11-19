@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Türkiye güncel son depremler listesi, AFAD anlık deprem verileri ve etki çapı (hissedilebilirlik) tahminleri." />
+  <!-- OpenStreetMap tiles DNS prefetch & preconnect -->
+  <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin>
+  <link rel="dns-prefetch" href="https://tile.openstreetmap.org">
+
+  <!-- Subresource Integrity (SRI) for Leaflet CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/style.css" />
+  <script type="module" src="./main.js"></script>
+  <title>Son Depremler</title>
+</head>
+
+<body>
+  <header>
+    <h1 class="brand-title"><a href="#">depremaniti.com</a></h1>
+    <div id="menu">
+      <button id="mainpage-btn" class="menu-item" style="display: none;">Ana Sayfa</button>
+      <button id="last-earthquakes-btn" class="menu-item">
+        Son Depremler
+      </button>
+      <button id="about-btn" class="menu-item">Hakkında</button>
+    </div>
+  </header>
+  <main></main>
+
+  <!-- Deprem Detay Modalı -->
+  <dialog id="detay-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-title">Deprem Detayı</h2>
+      </div>
+      <div id="modal-desc" class="modal-body"></div>
+      <div id="map" style="height: 300px; width: 100%; border-radius: 8px; margin-top: 1rem; z-index: 1;"></div>
+      <div class="modal-footer" style="margin-top: 1.5rem; text-align: right;">
+        <form method="dialog">
+          <button id="modal-close-btn" class="filter-btn active">Kapat</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <footer>depremaniti.com</footer>
+</body>
+
+</html>

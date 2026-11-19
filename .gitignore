@@ -1,0 +1,13 @@
+# macOS sistem dosyaları
+.DS_Store
+
+# Node.js (Gelecekte kazara eklenirse diye)
+node_modules/
+
+# Gizli anahtarlar ve çevre değişkenleri
+.env
+*.local
+
+# Cloudflare özel dosyaları
+functions/.commonsh/
+.wrangler/
