@@ -1,16 +1,25 @@
 function resolveCors(request) {
-  const origin = request.headers.get("Origin") || request.headers.get("Referer") || "";
+  const rawOrigin = request.headers.get("Origin") || request.headers.get("Referer") || "";
 
-  const isDevelopment = origin.includes("localhost") || origin.includes("127.0.0.1");
-  const isPreview = origin.endsWith(".pages.dev");
-  const isProduction = origin.includes("depremaniti.com");
+  if (!rawOrigin) {
+    return { isAllowed: true, corsOrigin: "*" };
+  }
 
-  const isAllowed = origin === "" || isDevelopment || isPreview || isProduction;
+  try {
+    const parsedUrl = new URL(rawOrigin);
+    const hostname = parsedUrl.hostname.toLowerCase();
 
-  return {
-    isAllowed,
-    corsOrigin: origin ? origin : "*"
-  };
+    const isDevelopment = hostname === "localhost" || hostname === "127.0.0.1";
+    const isPreview = hostname.endsWith(".pages.dev");
+    const isProduction = hostname === "depremaniti.com" || hostname.endsWith(".depremaniti.com");
+
+    return {
+      isAllowed: isDevelopment || isPreview || isProduction,
+      corsOrigin: parsedUrl.origin
+    };
+  } catch {
+    return { isAllowed: false, corsOrigin: "*" };
+  }
 }
 
 function forbiddenResponse() {
