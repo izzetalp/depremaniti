@@ -47,11 +47,11 @@ export function renderEarthquakesPage() {
 
       const majorList = document.createElement("ul");
       majorList.className = "earthquake-list-container";
-      
+
       const majorFragment = document.createDocumentFragment();
       majorEarthquakes.forEach(eq => majorFragment.appendChild(createEarthquakeElement(eq)));
       majorList.appendChild(majorFragment);
-      
+
       mainContent.appendChild(majorList);
     }
 
@@ -125,12 +125,12 @@ export function renderEarthquakesPage() {
   } else {
     const recentList = document.createElement("ul");
     recentList.className = "earthquake-list-container";
-    
+
     // YENİDEN ÇİZİM
     const fragment = document.createDocumentFragment();
     filteredEqs.forEach(eq => fragment.appendChild(createEarthquakeElement(eq)));
     recentList.appendChild(fragment);
-    
+
     dynamicListContainer.appendChild(recentList);
   }
 }
@@ -139,18 +139,18 @@ export function openMapModal(eq) {
   const dialog = document.getElementById("detay-modal");
   const modalTitle = document.getElementById("modal-title");
   const modalDesc = document.getElementById("modal-desc");
-  
+
   modalTitle.textContent = eq.location;
-  
+
   const prob = getFeltProbability(eq.magnitude, eq.depth);
   const radius = getFeltRadius(eq.magnitude, prob, eq.depth);
-  
+
   let htmlContent = `
     <p><strong>Büyüklük:</strong> ${escapeHTML(eq.magnitude)}</p>
     <p><strong>Derinlik:</strong> ${escapeHTML(eq.depth)} km</p>
     <p><strong>Tarih:</strong> ${escapeHTML(new Date(eq.date.endsWith("Z") ? eq.date : eq.date + "Z").toLocaleString("tr-TR"))}</p>
   `;
-  
+
   if (prob > 0) {
     htmlContent += `
       <p><strong>Tahmini Hissedilme:</strong> %${escapeHTML(prob)}</p>
@@ -159,13 +159,13 @@ export function openMapModal(eq) {
   } else {
     htmlContent += `<p><strong>Tahmini Hissedilme:</strong> Çok İhtimal Dışı</p>`;
   }
-  
+
   modalDesc.innerHTML = htmlContent;
   dialog.showModal();
-  
+
   const lat = parseFloat(eq.latitude);
   const lng = parseFloat(eq.longitude);
-  
+
   initOrUpdateMap(lat, lng, eq.magnitude, radius, prob);
 }
 
@@ -184,7 +184,7 @@ export function renderAboutPage() {
     "<strong>Amaç ve Veri Kaynağı:</strong> <strong>depremaniti.com</strong>, kişisel kullanım ve genel bilgilendirme amacıyla geliştirilmiş bağımsız bir deprem takip arayüzüdür. Deprem verileri, Afet ve Acil Durum Yönetimi Başkanlığının (<strong>AFAD</strong>) halka açık veri servisi üzerinden sunucu tarafında çekilir. Resmi servislere aşırı yük bindirmemek amacıyla veriler sunucu önbelleğinde (<strong>cache</strong>) <strong>60 saniye</strong> boyunca saklanır ve büyük artçı fırtınalarında dahi güncel kayıtların kaybolmaması için geriye dönük son <strong>7 gün</strong> (en fazla 2000 kayıt) ile sınırlandırılır. Önbellekleme nedeniyle ekrandaki kayıtlar ile AFAD'ın anlık resmi duyuruları arasında <strong>yaklaşık 1 dakikaya kadar gecikme</strong> yaşanabilir.",
     "<strong>Tahmini Hesaplamalar ve Sorumluluk Reddi:</strong> Depremlere ait hissedilme olasılığı ve etki yarıçapı değerleri resmi sismik ölçüm, ivmeölçer kaydı veya hasar tespiti değildir. Bu göstergeler yalnızca büyüklük (<code>M</code>) ve derinlik (<code>D</code>, en az 1 km) değerlerini kullanan basitleştirilmiş matematiksel yaklaşımlarla (<code>I = 1.5 &middot; M - 1.5 &middot; log<sub>10</sub>(D)</code> ve <code>R = &radic;(0.01 &middot; 10<sup>M</sup> &middot; D - D&sup2;)</code>) hesaplanan, haritada fikir vermesi amacıyla gösterilen <strong>yaklaşık tahminlerdir</strong>; yerel zemin koşullarını, fay yönelimini veya yapı özelliklerini yansıtmaz. Bu platform <strong>resmi bir kurum sitesi veya deprem erken uyarı sistemi değildir</strong>; acil durum, tahliye ve resmi teyit kararları için her zaman AFAD ve yetkili kamu kurumlarının resmi kanalları esas alınmalıdır.",
     "<strong>Gizlilik, Çerezler ve Dış Bağlantılar (KVKK Bilgilendirmesi):</strong> Bu sitede kullanıcı hesabı oluşturulmaz, herhangi bir kişisel veri toplanmaz veya kaydedilmez; reklam, analitik ya da takip çerezi kullanılmaz. Bununla birlikte sitenin ve detay haritasının teknik olarak sunulabilmesi amacıyla standart internet protokolleri gereği barındırma ve API altyapısı için <strong>Cloudflare</strong>, harita kütüphanesi için <strong>unpkg CDN</strong> (Leaflet) ve harita görüntüleri için <strong>OpenStreetMap</strong> (<code>&copy; OpenStreetMap</code> katkıda bulunanları) sunucularına IP adresi ve tarayıcı bilgisi gibi standart teknik erişim verileri iletilebilir. AFAD veri sorguları sunucu tarafından yapıldığından kullanıcı IP adresi AFAD sunucularına aktarılmaz.",
-    "<strong>İletişim ve Hukuki Bildirimler:</strong> 5651 sayılı Kanun kapsamındaki hukuki bildirimler, veri/içerik düzeltme talepleri ve gizlilikle ilgili her türlü başvuru için <strong>[iletisim@depremaniti.com]</strong> adresi üzerinden iletişime geçebilirsiniz.",
+    "<strong>İletişim ve Hukuki Bildirimler:</strong> 5651 sayılı Kanun kapsamındaki hukuki bildirimler, veri/içerik düzeltme talepleri ve gizlilikle ilgili her türlü başvuru için <strong>izzetalpdemirkan@hotmail.com</strong> adresi üzerinden iletişime geçebilirsiniz.",
     "<em>Bu sitede yer alan bilgi ve tahminlerin kullanımından doğabilecek doğrudan veya dolaylı sonuçlardan site geliştiricisi sorumlu tutulamaz.</em>"
   ];
 
@@ -205,7 +205,7 @@ function createEarthquakeElement(eq) {
   // JavaScript'in bunu yerel saat olarak yorumlayıp -3 saat göstermemesi için 'Z' ekleyerek UTC olduğunu belirtiyoruz.
   const dateStr = eq.date.endsWith("Z") ? eq.date : eq.date + "Z";
   const dateObj = new Date(dateStr);
-  
+
   const formattedDate = dateObj.toLocaleString("tr-TR", {
     timeZone: "Europe/Istanbul",
     year: "numeric",
@@ -274,14 +274,14 @@ function createEarthquakeElement(eq) {
     const barOuter = document.createElement("div");
     barOuter.className = "prob-bar-outer";
     barOuter.title = `Tahmini Hissedilme: %${prob}`;
-    
+
     const barInner = document.createElement("div");
     barInner.className = "prob-bar-inner";
     barInner.style.width = prob + "%";
-    
+
     if (prob >= 80) barInner.style.backgroundColor = "#ef4444"; // Kırmızı
     else if (prob >= 40) barInner.style.backgroundColor = "#f59e0b"; // Turuncu
-    
+
     barOuter.appendChild(barInner);
     rightContainer.appendChild(barOuter);
   }
